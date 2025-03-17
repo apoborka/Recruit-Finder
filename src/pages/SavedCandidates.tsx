@@ -19,8 +19,14 @@ const SavedCandidates = () => {
     setFilter(e.target.value);
   };
 
+  const handleRemoveCandidate = (id: number) => {
+    const updatedCandidates = savedCandidates.filter(candidate => candidate.id !== id);
+    setSavedCandidates(updatedCandidates);
+    localStorage.setItem('savedCandidates', JSON.stringify(updatedCandidates));
+  };
+
   const filteredCandidates = savedCandidates
-    .filter(candidate => candidate.name.toLowerCase().includes(filter.toLowerCase()))
+    .filter(candidate => candidate.name?.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => {
       const aValue = (a as any)[sortCriteria];
       const bValue = (b as any)[sortCriteria];
@@ -50,19 +56,35 @@ const SavedCandidates = () => {
           <input type="text" value={filter} onChange={handleFilterChange} />
         </label>
       </div>
-      <ul>
-        {filteredCandidates.map(candidate => (
-          <li key={candidate.id} className="candidate-card">
-            <img src={candidate.avatar_url} alt={candidate.name} />
-            <p>Name: {candidate.name}</p>
-            <p>Username: {candidate.login}</p>
-            {candidate.location && <p>Location: {candidate.location}</p>}
-            {candidate.email && <p>Email: {candidate.email}</p>}
-            {candidate.company && <p>Company: {candidate.company}</p>}
-            <a href={candidate.html_url}>GitHub Profile</a>
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Bio</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredCandidates.map(candidate => (
+            <tr key={candidate.id}>
+              <td><img src={candidate.avatar_url} alt={candidate.name} width="50" /></td>
+              <td>{candidate.name}</td>
+              <td>{candidate.login}</td>
+              <td>{candidate.location}</td>
+              <td>{candidate.email}</td>
+              <td>{candidate.company}</td>
+              <td>
+                <button onClick={() => handleRemoveCandidate(candidate.id)}>Remove from list</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

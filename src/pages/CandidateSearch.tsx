@@ -47,8 +47,8 @@ const CandidateSearch = () => {
         <a href={currentCandidate.html_url}>GitHub Profile</a>
       </div>
       <div className="candidate-buttons">
-        <button onClick={handleSaveCandidate}>+</button>
-        <button onClick={showNextCandidate}>-</button>
+        <button className="save-button" onClick={handleSaveCandidate}>+</button>
+        <button className="next-button" onClick={showNextCandidate}>-</button>
       </div>
     </div>
   );

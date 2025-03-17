@@ -82,6 +82,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 80px; /* Adjust this value based on the height of your navbar */
 }
 
 tr {
@@ -96,13 +97,25 @@ tbody tr:nth-child(odd) {
 
 .nav {
   display: flex;
-  justify-content: flex-start;
-  padding: 1em 2em;
+  justify-content: left;
+  padding: 0 0 0 15px; /* 15px from the top, 20px from the left */
+  position: fixed; /* Ensure the nav stays at the top */
+  top: 0; /* Position at the top */
+  left: 0; /* Position at the left */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Optional: Add background color for better visibility */
+  z-index: 1000; /* Ensure the nav stays on top of other elements */
+}
+
+.nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .nav-item {
-  padding: 0 0.5rem;
-  list-style: none;
+  padding-right: 25px; /* 25px padding between the buttons */
 }
 
 .nav-link {
@@ -121,11 +134,11 @@ tbody tr:nth-child(odd) {
 
 /* Additional styles for CandidateSearch and SavedCandidates components */
 .candidate-card {
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   padding: 1em;
   margin: 1em 0;
-  width: 80%;
   max-width: 600px;
   text-align: center;
 }
@@ -151,8 +164,40 @@ tbody tr:nth-child(odd) {
 
 .candidate-buttons {
   display: flex;
-  justify-content: space-around;
-  margin-top: 1em;
+  justify-content: center;
+  margin: 1em auto 0 auto; /* Center the buttons horizontally */
+  width: auto; /* Adjust width to fit content */
+  gap: 10px; /* Add space between the buttons */
+}
+
+.candidate-buttons button {
+  border-radius: 50px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.candidate-buttons button:hover {
+  border-color: #646cff;
+}
+
+.candidate-buttons button:focus,
+.candidate-buttons button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.candidate-buttons .save-button {
+  background-color: green;
+  color: white;
+}
+
+.candidate-buttons .next-button {
+  background-color: red;
+  color: white;
 }
 
 .filter-sort {
