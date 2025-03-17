@@ -22,10 +22,10 @@ Visit the URL:
 
 ## Usage
 The landing page will load an randomized user's GitHub profile.
-[Candidate Search page](src/assets/CandidateSearch.jpg)
+![Candidate Search page](src/assets/CandidateSearch.jpg)
 Clicking "+" will add that user to the Saved Candidates page, while pressing "-" will skip the currently displayed user.
 When a list of potential candidates has been created, navigate to the "Saved Candidates" page.
-[Saved Candidates page](src/assets/SavedCandidates.jpg)
+![Saved Candidates page](src/assets/SavedCandidates.jpg)
 From here, profiles can be reviewed and removed.
 If a candidate is of interest, use the displayed contact information to reach out for an opportunity to connect with your next potential hire!
 
