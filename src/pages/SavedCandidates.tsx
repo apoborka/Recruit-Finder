@@ -8,6 +8,7 @@ const SavedCandidates = () => {
 
   useEffect(() => {
     const candidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
+    console.log('Retrieved candidates from local storage:', candidates); // Debug log
     setSavedCandidates(candidates);
   }, []);
 
@@ -26,10 +27,10 @@ const SavedCandidates = () => {
   };
 
   const filteredCandidates = savedCandidates
-    .filter(candidate => candidate.name?.toLowerCase().includes(filter.toLowerCase()))
+    .filter(candidate => candidate.name?.toLowerCase().includes(filter.toLowerCase()) || candidate.login.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => {
-      const aValue = (a as any)[sortCriteria];
-      const bValue = (b as any)[sortCriteria];
+      const aValue = (a as any)[sortCriteria] || '';
+      const bValue = (b as any)[sortCriteria] || '';
       if (aValue < bValue) return -1;
       if (aValue > bValue) return 1;
       return 0;
@@ -72,12 +73,13 @@ const SavedCandidates = () => {
         <tbody>
           {filteredCandidates.map(candidate => (
             <tr key={candidate.id}>
-              <td><img src={candidate.avatar_url} alt={candidate.name} width="50" /></td>
-              <td>{candidate.name}</td>
+              <td><img src={candidate.avatar_url} alt={candidate.name || candidate.login} width="50" /></td>
+              <td>{candidate.name || 'N/A'}</td>
               <td>{candidate.login}</td>
-              <td>{candidate.location}</td>
-              <td>{candidate.email}</td>
-              <td>{candidate.company}</td>
+              <td>{candidate.location || 'N/A'}</td>
+              <td>{candidate.email || 'N/A'}</td>
+              <td>{candidate.company || 'N/A'}</td>
+              <td>{candidate.bio || 'N/A'}</td>
               <td>
                 <button onClick={() => handleRemoveCandidate(candidate.id)}>Remove from list</button>
               </td>

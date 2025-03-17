@@ -82,7 +82,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px; /* Adjust this value based on the height of your navbar */
+  padding-top: 50px;
 }
 
 tr {
@@ -98,13 +98,13 @@ tbody tr:nth-child(odd) {
 .nav {
   display: flex;
   justify-content: left;
-  padding: 0 0 0 15px; /* 15px from the top, 20px from the left */
-  position: fixed; /* Ensure the nav stays at the top */
-  top: 0; /* Position at the top */
-  left: 0; /* Position at the left */
+  padding: 0 0 0 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Optional: Add background color for better visibility */
-  z-index: 1000; /* Ensure the nav stays on top of other elements */
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 .nav ul {
@@ -115,7 +115,7 @@ tbody tr:nth-child(odd) {
 }
 
 .nav-item {
-  padding-right: 25px; /* 25px padding between the buttons */
+  padding-right: 25px;
 }
 
 .nav-link {
@@ -165,9 +165,9 @@ tbody tr:nth-child(odd) {
 .candidate-buttons {
   display: flex;
   justify-content: center;
-  margin: 1em auto 0 auto; /* Center the buttons horizontally */
-  width: auto; /* Adjust width to fit content */
-  gap: 10px; /* Add space between the buttons */
+  margin: 1em auto 0 auto;
+  width: auto;
+  gap: 10px;
 }
 
 .candidate-buttons button {
