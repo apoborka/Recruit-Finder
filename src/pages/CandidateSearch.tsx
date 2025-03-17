@@ -14,6 +14,7 @@ const CandidateSearch = () => {
       setCurrentCandidate(data[0]);
     };
     fetchCandidates();
+    console.log(candidates);
   }, []);
 
   const handleSaveCandidate = () => {
