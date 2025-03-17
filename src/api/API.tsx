@@ -15,29 +15,22 @@ const searchGithub = async (): Promise<Candidate[]> => {
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
     }
-    return data;
+    // Fetch additional details for each user
+    const detailedData = await Promise.all(
+      data.map(async (user: Candidate) => {
+        const userDetails = await fetch(user.url, {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          },
+        });
+        return await userDetails.json();
+      })
+    );
+    return detailedData;
   } catch (err) {
     console.error(err);
     return [];
   }
 };
 
-const searchGithubUser = async (username: string): Promise<Candidate> => {
-  try {
-    const response = await fetch(`https://api.github.com/users/${username}`, {
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-      },
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error('invalid API response, check the network tab');
-    }
-    return data;
-  } catch (err) {
-    console.error(err);
-    return {} as Candidate;
-  }
-};
-
-export { searchGithub, searchGithubUser };
+export { searchGithub };

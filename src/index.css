@@ -221,3 +221,44 @@ tbody tr:nth-child(odd) {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
+/* Style for the remove button */
+.remove-button {
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.remove-button:hover {
+  border-color: #ff0000;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  width: 30px;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+td {
+  background-color: #000;
+  color: white;
+}

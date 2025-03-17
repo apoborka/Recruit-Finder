@@ -9,6 +9,7 @@ const CandidateSearch = () => {
   useEffect(() => {
     const fetchCandidates = async () => {
       const data = await searchGithub();
+      console.log('Fetched candidates:', data); // Debug log
       setCandidates(data);
       setCurrentCandidate(data[0]);
     };
@@ -20,14 +21,17 @@ const CandidateSearch = () => {
     if (currentCandidate) {
       savedCandidates.push(currentCandidate);
       localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
+      console.log('Saved candidates:', savedCandidates); // Debug log
     }
     showNextCandidate();
   };
 
   const showNextCandidate = () => {
-    const nextCandidate = candidates.shift();
-    setCandidates([...candidates]);
-    setCurrentCandidate(nextCandidate || null);
+    setCandidates(prevCandidates => {
+      const nextCandidate = prevCandidates.length > 1 ? prevCandidates[1] : null;
+      setCurrentCandidate(nextCandidate);
+      return prevCandidates.slice(1);
+    });
   };
 
   if (!currentCandidate) {

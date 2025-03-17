@@ -7,9 +7,11 @@ const SavedCandidates = () => {
   const [filter, setFilter] = useState<string>('');
 
   useEffect(() => {
-    const candidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
+    const candidates: Candidate[] = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
     console.log('Retrieved candidates from local storage:', candidates); // Debug log
-    setSavedCandidates(candidates);
+    // Ensure unique keys by filtering out duplicates
+    const uniqueCandidates = Array.from(new Map(candidates.map(candidate => [candidate.id, candidate])).values());
+    setSavedCandidates(uniqueCandidates);
   }, []);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,7 +29,9 @@ const SavedCandidates = () => {
   };
 
   const filteredCandidates = savedCandidates
-    .filter(candidate => candidate.name?.toLowerCase().includes(filter.toLowerCase()) || candidate.login.toLowerCase().includes(filter.toLowerCase()))
+    .filter(candidate => 
+      (candidate.name?.toLowerCase().includes(filter.toLowerCase()) || candidate.login?.toLowerCase().includes(filter.toLowerCase()))
+    )
     .sort((a, b) => {
       const aValue = (a as any)[sortCriteria] || '';
       const bValue = (b as any)[sortCriteria] || '';
@@ -73,7 +77,7 @@ const SavedCandidates = () => {
         <tbody>
           {filteredCandidates.map(candidate => (
             <tr key={candidate.id}>
-              <td><img src={candidate.avatar_url} alt={candidate.name || candidate.login} width="50" /></td>
+              <td><img src={candidate.avatar_url} alt={candidate.name || candidate.login} width="30" /></td>
               <td>{candidate.name || 'N/A'}</td>
               <td>{candidate.login}</td>
               <td>{candidate.location || 'N/A'}</td>
@@ -81,7 +85,7 @@ const SavedCandidates = () => {
               <td>{candidate.company || 'N/A'}</td>
               <td>{candidate.bio || 'N/A'}</td>
               <td>
-                <button onClick={() => handleRemoveCandidate(candidate.id)}>Remove from list</button>
+                <button className="remove-button" onClick={() => handleRemoveCandidate(candidate.id)}>Remove from list</button>
               </td>
             </tr>
           ))}
